@@ -7,6 +7,7 @@ use Illuminate\View\View;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -31,9 +32,9 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'username' => ['required', 'string', 'max:30', 'regex:/^(?!\.)([a-z0-9._]{1,30})$/'],
+            'username' => ['required', 'string', 'max:30', 'regex:/^(?!\.)([a-z0-9._]{1,30})$/','unique:'.User::class],
             'email' => ['required', 'string', 'lowercase', 'email:dns', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', 'min:5'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
@@ -46,6 +47,11 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user, $request->boolean('remember'));
+        $request->session()->regenerate();
+
+        if (!$user->hasVerifiedEmail()) {
+            return redirect()->route('verification.notice');
+        }
 
         return redirect()->intended(route('dashboard'));
     }
