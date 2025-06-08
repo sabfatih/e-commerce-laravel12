@@ -7,11 +7,13 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Review;
 use App\Models\Wishlist;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Str;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -23,6 +25,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
     ];
@@ -68,6 +71,18 @@ class User extends Authenticatable
 
     protected $keyType = 'string';
     public $incrementing = false;
-    
+
+    protected static function boot()
+    {
+
+      parent::boot();
+
+      static::creating(function($model){
+        // dd($model);
+        if (!$model->getKey()) {
+          $model->{$model->getKeyName()} = (string) Str::uuid();
+        }
+      });
+    }
 
 }
