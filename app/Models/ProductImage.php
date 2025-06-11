@@ -15,6 +15,8 @@ class ProductImage extends Model
       return $this->belongsTo(Product::class);
     }
 
+    protected $fillable = ['product_id', 'image_url', 'is_primary'];
+
     protected $keyType = 'string';    // supaya Laravel tahu tipe primary key-nya string (UUID)
     public $incrementing = false;     // supaya Laravel gak expect auto increment integer
 

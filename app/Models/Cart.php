@@ -19,6 +19,8 @@ class Cart extends Model
       return $this->hasMany(CartItem::class);
     }
 
+    protected $fillable = ['user_id'];
+
     protected $keyType = 'string';    // supaya Laravel tahu tipe primary key-nya string (UUID)
     public $incrementing = false;     // supaya Laravel gak expect auto increment integer
 
