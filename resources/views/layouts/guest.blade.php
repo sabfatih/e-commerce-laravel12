@@ -10,47 +10,23 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+            @include('layouts.navigation')
 
-          @php
-            // Ambil route name saat ini
-            $routeName = request()->route()->getName();
-            // Default title
-            $title = 'My Application';
-            // Set title berdasarkan route name
-            switch ($routeName) {
-              case 'login':
-                  $title = 'Login';
-                  break;
-              case 'register':
-                  $title = 'Register';
-                  break;
-              case 'password.request':
-                  $title = 'Forgot Password';
-                  break;
-              case 'password.reset':
-                  $title = 'Reset Password';
-                  break;
-              case 'verification.notice':
-                  $title = 'Verify Email';
-                  break;
-              case 'verification.verify':
-                  $title = 'Verify Email';
-                  break;
-              case 'password.confirm':
-                  $title = 'Confirm Password';
-                  break;
-              default:
-                  // Bisa ditambah case lain sesuai kebutuhan
-                  break;
-            }
-          @endphp
-            <h1 class="text-5xl text-center tracking-widest text-primary-500 font-inter font-bold">{{ $title }}</h1>
+            <!-- Page Heading -->
+            @isset($header)
+                <header class="bg-white dark:bg-gray-800 shadow">
+                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endisset
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
+            <!-- Page Content -->
+            <main class="max-w-7xl mx-auto bg-neutral-200 min-h-screen">
                 {{ $slot }}
-            </div>
+            </main>
         </div>
     </body>
 </html>
