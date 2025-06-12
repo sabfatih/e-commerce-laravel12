@@ -13,7 +13,9 @@ class WishlistController extends Controller
      */
     public function index()
     {
-        //
+      $user = auth('web')->user();
+      
+      return view('components.profile.wishlists', ["wishlists" => Wishlist::where('user_id', '=', $user->id)->get()]);
     }
 
     /**
@@ -42,15 +44,15 @@ class WishlistController extends Controller
         "product_id" => $product_id,
       ]);
 
-      return redirect("product")->with("success", "Product added to wishlist");
+      return redirect("product")->with("success", "Product successfully added to wishlist");
     }
 
     /**
      * Display the specified resource.
      */
     public function show(Wishlist $wishlist)
-    {
-        //
+    { 
+      return view('components.profile.wishlist', ["wishlistItems" => WishlistItem::with('product.categories')->where('wishlist_id', '=', $wishlist->id)->get()]);
     }
 
     /**
@@ -73,7 +75,15 @@ class WishlistController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Wishlist $wishlist)
-    {
-        //
+    { 
+      $wishlist->delete();
+
+      return redirect("wishlist")->with("success", "Wishlist deleted successfully");
+    }
+
+    public function itemDestroy(WishlistItem $wishlistItem){
+      $wishlistItem->delete();
+
+      return back()->with("success", "Product successfully deleted from wishlist");
     }
 }

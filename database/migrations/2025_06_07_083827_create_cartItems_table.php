@@ -13,14 +13,14 @@ return new class extends Migration
     {
       Schema::create('cart_items', function (Blueprint $table) {
         $table->uuid('id');
-        $table->uuid('cart_id');
+        $table->uuid('user_id');
         $table->uuid('product_id');
         $table->integer('quantity');
         $table->timestamps();
-        $table->primary(['id','cart_id', 'product_id']);
+        $table->primary(['id','user_id', 'product_id']);
 
 
-        $table->foreign('cart_id')->references('id')->on('carts')->cascadeOnDelete();
+        $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         $table->foreign('product_id')->references('id')->on('products')->cascadeOnDelete();
       });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('carts');
+        Schema::dropIfExists('cart_items');
     }
 };

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WishlistController;
@@ -20,7 +21,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('/product', ProductController::class)->middleware(isAdmin::class);
-Route::resource('/wishlist', WishlistController::class)->middleware(['auth', 'verified']);
+Route::middleware(['auth', 'verified'])->group(function () {
+  Route::resource('/product', ProductController::class)->middleware(isAdmin::class);
+  Route::resource('/wishlist', WishlistController::class);
+  Route::delete('/wishlist/item/{wishlistItem}', [WishlistController::class, 'itemDestroy'])->name('wishlist.itemDestroy');
+
+  Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+  Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+  Route::delete('/cart', [CartController::class, 'destroy'])->name('cart.destroy');
+  Route::delete('/cart/item/{cartItem}', [CartController::class, 'itemDestroy'])->name('cart.itemDestroy');
+});
+
 
 require __DIR__.'/auth.php';

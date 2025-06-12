@@ -5,7 +5,6 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductImage;
-use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\Order;
 use App\Models\OrderItem;
@@ -58,20 +57,18 @@ class DatabaseSeeder extends Seeder
       ProductImage::factory(rand(0, 4))->create(['product_id' => $product->id]);
     });
 
-    // 5. Cart per user (1 user = 1 cart)
-    $carts = $allUsers->map(fn($user) => Cart::factory()->create(['user_id' => $user->id]));
 
     // 6. Cart items (unik cart_id + product_id)
     $cartProductPairs = collect();
     $maxCartItems = 80;
     $count = 0;
     while ($count < $maxCartItems) {
-      $cart = $carts->random();
+      $user = $allUsers->random();
       $product = $products->random();
-      $key = $cart->id . '-' . $product->id;
+      $key = $user->id . '-' . $product->id;
       if (!$cartProductPairs->contains($key)) {
         CartItem::factory()->create([
-          'cart_id' => $cart->id,
+          'user_id' => $user->id,
           'product_id' => $product->id,
         ]);
         $cartProductPairs->push($key);

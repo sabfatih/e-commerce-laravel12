@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Cart;
+use App\Models\User;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -21,7 +21,7 @@ class CartItemFactory extends Factory
     {
         return [
             'id' => (string) Str::uuid(),
-            'cart_id' => Cart::factory(),
+            'user_id' => User::factory(),
             'product_id' => Product::factory(),
             'quantity' => fake()->randomNumber(2),
         ];

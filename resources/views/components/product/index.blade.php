@@ -17,8 +17,9 @@
                   <i class="fa-regular fa-heart"></i>
                 </button>
               </form>
-              <form action="" method="POST">
+              <form action="{{ route('cart.store') }}" method="POST">
                 @csrf
+                <input type="hidden" name="product_id" id="product_id" value="{{ $product->id }}">
                 <button class="cursor-pointer">
                   <i class="fa-solid fa-cart-shopping"></i>
                 </button>
