@@ -13,7 +13,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+      return view('components.product.index', ["products" => Product::all()]);
     }
 
     /**
@@ -21,7 +21,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-      return view('components.add-product.index');
+      return view('components.product.add-product');
     }
 
     /**

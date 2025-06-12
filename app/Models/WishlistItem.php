@@ -19,6 +19,11 @@ class WishlistItem extends Model
       return $this->belongsTo(Product::class);
     }
 
+    protected $fillable = [
+      'wishlist_id',
+      'product_id',
+    ];
+
     protected $keyType = 'string';
     public $incrementing = false;
 

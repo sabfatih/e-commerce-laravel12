@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>add product</title>
-  @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body>
+<x-layouts.starter>
   <form action="{{ route('product.store') }}" method="POST" class="flex flex-col gap-4" enctype="multipart/form-data">
       @csrf
       <div class="flex flex-col gap-2">
@@ -94,5 +85,4 @@
     }
   }
 </script>
-</body>
-</html>
+</x-layouts.starter>

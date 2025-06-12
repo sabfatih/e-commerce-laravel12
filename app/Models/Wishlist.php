@@ -19,6 +19,11 @@ class Wishlist extends Model
       return $this->hasMany(WishlistItem::class);
     }
 
+    protected $fillable = [
+      'user_id',
+      'name',
+    ];
+
     protected $keyType = 'string';
     public $incrementing = false;
 
