@@ -96,8 +96,10 @@ class WishlistController extends Controller
     {
       $user = auth('web')->user();
       $wishlist = Wishlist::firstOrCreate([
-          'user_id' => $user->id,
-          'name' => $user->name . "'s 1st wishlist"
+        'user_id' => $user->id,
+      ],
+      [ 
+        'name' => $user->name . "'s 1st wishlist"
       ]);
 
       WishlistItem::create([

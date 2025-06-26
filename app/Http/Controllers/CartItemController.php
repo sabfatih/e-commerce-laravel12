@@ -13,7 +13,7 @@ class CartItemController extends Controller
     public function index(){
       $user = auth('web')->user();
 
-      return view("components.profile.cart", ["cartItems" => CartItem::with('product.categories')->where("user_id", "=", $user->id)->get()]);
+      return view("components.profile.cart", ["cartItems" => CartItem::with('product.categories')->where("user_id", "=", $user->id)->latest()->get()]);
     }
 
     /**
@@ -67,7 +67,18 @@ class CartItemController extends Controller
      */
     public function update(Request $request, CartItem $cartItem)
     {
-        //
+      $request->validate([
+        'quantity' => ['required', 'integer', 'min:1', 'max:99']
+      ]);
+
+      // dd($request->input('quantity'));
+      // dd($cartItem);
+
+      $cartItem->update([
+        'quantity' => $request->input('quantity')
+      ]);
+
+      return back();
     }
 
     /**

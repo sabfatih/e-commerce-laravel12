@@ -18,13 +18,14 @@ class ProductController extends Controller
 
       $products = Product::all();
 
-      // $wishlistedProductIdByCurrentUser = WishlistItem::whereHas('wishlist', function($query) use ($user) {
-      //   $query->where('user_id', '=', $user->id);
-      // })->pluck('product_id')->toArray();
+      $wishlistedProductIdByCurrentUser = WishlistItem::whereHas('wishlist', function($query) use ($user) {
+        $query->where('user_id', '=', $user->id);
+      })->pluck('product_id','id')->toArray();
 
-      // dd($wishlistedProductIdByCurrentUser);
-
-      return view('components.product.index', ["products" => $products]);
+      // dump($wishlistedProductIdByCurrentUser);
+      // dd(in_array('c97ee6e6-f35b-4502-b5e8-fde8bab6dfcb', $wishlistedProductIdByCurrentUser));
+      
+      return view('components.product.index', ["products" => $products, "wishlistedProductIdByCurrentUser" => $wishlistedProductIdByCurrentUser]);
     }
 
     /**

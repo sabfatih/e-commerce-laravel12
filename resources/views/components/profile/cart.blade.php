@@ -21,12 +21,15 @@
                 <i class="fa-solid fa-trash text-xl text-red-500"></i>
               </button>
             </form>
-            <div x-data="{'quantity': {{ $cartItem->quantity }}}" class="w-fit h-10 bg-teal-300 rounded-full text-xl flex justify-between items-center gap-x-2 px-2 py-1">
-              <button x-on:click="quantity--" 
+              
+            <form x-data="{'quantity': {{ $cartItem->quantity }}}" id="quantity-form" action="{{ route('cartItem.update', $cartItem->id) }}" method="POST" class="w-fit h-10 bg-teal-300 rounded-full text-xl flex justify-between items-center gap-x-2 px-2 py-1">
+              <button type="button" onclick="updateQuantity(event)" x-on:click="quantity--" 
               :class="quantity == 1 ? '' : 'cursor-pointer'" 
               :disabled="quantity == 1">
                 <i class="fa-solid fa-minus" :class="quantity == 1 ? 'opacity-25' : ''"></i>
               </button>
+              @csrf
+              @method('PATCH')
               <input 
               x-model="quantity" 
               @keydown="
@@ -39,19 +42,35 @@
                   value = 1;
                   quantity = 1;
                 }
+                if($event.target.value > 99){
+                  value = 99;
+                  quantity = 99;
+                }
               "
               @paste.prevent
               type="number" name="quantity" id="quantity-cart-item" 
-              min="1" max="1000000" 
-              class="w-12 bg-transparent border-none focus:ring-0"/>
-              <button x-on:click="quantity++" class="cursor-pointer">
+              min="1" max="99" 
+              class="w-12 bg-transparent border-none focus:ring-0"
+              />
+              <button type="button" onclick="updateQuantity(event)" :disabled="quantity == 99" :class="quantity == 99 ? 'opacity-25' : 'cursor-pointer'" x-on:click="quantity++">
                 <i class="fa-solid fa-plus"></i>
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </div>
     @endforeach
 
   </main>
+
+  <script>
+    let debounceTimer;
+    const updateQuantity = (e) => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        e.target.closest('form').submit();
+      }, 500);
+    }
+
+  </script>
 </x-layouts.starter>

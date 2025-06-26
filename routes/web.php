@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WishlistController;
@@ -23,8 +24,9 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-  Route::resource('/product', ProductController::class)->middleware(isAdmin::class);
-  Route::resource('/wishlist', WishlistController::class);
+  Route::resource('product', ProductController::class)->middleware(isAdmin::class);
+  Route::resource('cart', CartItemController::class)->parameters(['cart' => 'cartItem'])->names('cartItem');
+  Route::resource('wishlist', WishlistController::class);
   Route::post('/wishlist/item/{productId}', [WishlistController::class, 'itemStore'])->name('wishlist.itemStore');
   Route::patch('/wishlist/item/{wishlistItem}', [WishlistController::class, 'itemUpdate'])->name('wishlist.itemUpdate');
   Route::delete('/wishlist/item/{wishlistItem}', [WishlistController::class, 'itemDestroy'])->name('wishlist.itemDestroy');
