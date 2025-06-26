@@ -4,12 +4,14 @@
     <div class="flex flex-wrap mt-24 gap-x-4 gap-y-6 justify-evenly">
 
       @foreach ($products as $product)
-        <div class="w-36 h-48 bg-sky-500 rounded-md space-y-1">  
+        <a href="{{ route('product.show', $product->id) }}" class="w-36 h-48 bg-sky-500 rounded-md space-y-1">  
           <img src="https://picsum.photos/id/1/200/300" alt="example image" class="w-full h-7/12 rounded-t-md object-cover">
           <div class="w-full px-2 py-1.5">
             <h3 class="text-base">{{ Str::limit($product->name, 10) }}</h3>
             <p class="text-sm">{{ $product->price }}</p>
             <div class="flex justify-between mt-1">
+
+              
               @if (in_array($product->id, $wishlistedProductIdByCurrentUser))
                 <form action="{{ route('wishlist.itemDestroy', array_keys($wishlistedProductIdByCurrentUser, $product->id)) }}" method="POST">
                   @csrf
@@ -37,7 +39,7 @@
               </form>
             </div>
           </div>
-        </div>
+        </a>
       @endforeach
     </div>
   </main>

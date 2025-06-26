@@ -6,3 +6,7 @@ multiple product images
 2. images di-store di input hidden dan di preview
 3. input asli di-clear
 
+
+fitur "You may also like" di detail produk:
+Lazy load
+1. Ketika user scroll sampai section tertentu, fetch data 'products' yang 'categories'nya mirip dengan product yang ditampilkan saat itu

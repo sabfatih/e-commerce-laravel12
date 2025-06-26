@@ -1,3 +1,30 @@
+<nav class="bg-white shadow-sm py-4">
+  <div class="container mx-auto px-4 flex justify-between items-center">
+      <div class="flex items-center">
+          <h1 class="text-xl font-bold text-gray-800">MINIMALIST</h1>
+      </div>
+      <nav class="hidden md:flex space-x-8">
+          <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
+          <a href="#" class="text-gray-600 hover:text-gray-900">Products</a>
+          <a href="#" class="text-gray-600 hover:text-gray-900">Collections</a>
+          <a href="#" class="text-gray-600 hover:text-gray-900">About</a>
+      </nav>
+      <div class="flex items-center space-x-4">
+          <button class="text-gray-600 hover:text-gray-900">
+              <i class="fas fa-search"></i>
+          </button>
+          <button class="text-gray-600 hover:text-gray-900">
+              <i class="fas fa-shopping-bag"></i>
+          </button>
+          <button class="md:hidden text-gray-600 hover:text-gray-900">
+              <i class="fas fa-bars"></i>
+          </button>
+      </div>
+  </div>
+</nav>
+
+
+{{-- 
 <nav x-data="{ open: false }" class="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -133,4 +160,4 @@
           </div>
         @endauth
     </div>
-</nav>
+</nav> --}}

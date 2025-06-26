@@ -107,7 +107,7 @@ class WishlistController extends Controller
         "product_id" => $productId,
       ]);
 
-      return redirect("product")->with("success", "Product successfully added to wishlist");
+      return back()->with("success", "Product successfully added to wishlist");
     }
 
     public function itemUpdate(Request $request, WishlistItem $wishlistItem){

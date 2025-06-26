@@ -7,7 +7,7 @@
   <title>add product</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body>
+<body class="bg-gray-50">
 
   @session('success')
     <div x-data="{closePopUp: true}" x-show="closePopUp" id="toast-success" class="fixed top-4 translate-x-1/2 right-1/2 sm:translate-x-0 sm:right-4 flex items-center w-11/12 sm:w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow-sm dark:text-gray-400 dark:bg-gray-800 z-[100000]" role="alert">

@@ -49,3 +49,38 @@ input[type="number"]#quantity-cart-item::-webkit-outer-spin-button {
 input[type="number"]#quantity-cart-item {
     -moz-appearance: textfield;
 }
+
+/* Animasi Fade In */
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Animasi Scale In */
+@keyframes scale-in {
+    0% {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Kelas untuk animasi */
+.fade-in {
+    animation: fade-in 0.5s ease-in-out;
+}
+
+.scale-in {
+    animation: scale-in 0.3s ease-out;
+}
+
+.pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}

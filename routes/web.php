@@ -1,13 +1,16 @@
 <?php
 
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CartItemController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\WishlistController;
-use App\Http\Controllers\WishlistItemController;
+use App\Models\Product;
+use Illuminate\Http\Request;
 use App\Http\Middleware\isAdmin;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CartItemController;
+
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\WishlistItemController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,6 +28,16 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
   Route::resource('product', ProductController::class)->middleware(isAdmin::class);
+  Route::get('/api/product', function(Request $request){
+    $categories = $request->categories;
+    $products = Product::wherehas('categories', function($query) use ($categories) {
+      $query->whereIn('id', $categories);
+    })->get();
+    
+    return $products;
+  });
+
+
   Route::resource('cart', CartItemController::class)->parameters(['cart' => 'cartItem'])->names('cartItem');
   Route::resource('wishlist', WishlistController::class);
   Route::post('/wishlist/item/{productId}', [WishlistController::class, 'itemStore'])->name('wishlist.itemStore');

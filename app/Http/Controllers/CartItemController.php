@@ -43,7 +43,7 @@ class CartItemController extends Controller
         $cartItem->increment('quantity');
       }
 
-      return redirect("product")->with("success", "Product successfully added to cart");
+      return back()->with("success", "Product successfully added to cart");
     }
 
     /**
