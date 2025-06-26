@@ -14,7 +14,7 @@
           <span class="text-center text-lg">${{ $cartItem->product->price }}</span>
 
           <div class="flex gap-x-4">
-            <form action="{{ route('cart.itemDestroy',  $cartItem->id ) }}" method="POST" class="flex">
+            <form action="{{ route('cartItem.destroy',  $cartItem->id ) }}" method="POST" class="flex">
               @csrf
               @method('DELETE')
               <button class="cursor-pointer my-auto">

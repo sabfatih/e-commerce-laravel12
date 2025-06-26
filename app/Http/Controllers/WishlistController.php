@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Wishlist;
 use App\Models\WishlistItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class WishlistController extends Controller
 {
@@ -31,20 +32,17 @@ class WishlistController extends Controller
      */
     public function store(Request $request)
     {
+      $request->validate([
+        'name' => ['required', 'max:255'],
+      ]);
+
       $user = auth('web')->user();
-      $wishlist = Wishlist::firstOrCreate([
-          'user_id' => $user->id,
-          'name' => 'Wishlist #1'
+      Wishlist::create([
+        'user_id' => $user->id,
+        'name' => $request->input('name')
       ]);
 
-      $product_id = $request->input('product_id');
-
-      WishlistItem::create([
-        "wishlist_id" => $wishlist->id,
-        "product_id" => $product_id,
-      ]);
-
-      return redirect("product")->with("success", "Product successfully added to wishlist");
+      return redirect("wishlist")->with("success", "Wishlist successfully created");
     }
 
     /**
@@ -52,7 +50,12 @@ class WishlistController extends Controller
      */
     public function show(Wishlist $wishlist)
     { 
-      return view('components.profile.wishlist', ["wishlistItems" => WishlistItem::with('product.categories')->where('wishlist_id', '=', $wishlist->id)->get()]);
+      $user = auth('web')->user();
+      
+      return view('components.profile.wishlist', [
+        "wishlistItems" => WishlistItem::with('product.categories')->where('wishlist_id', '=', $wishlist->id)->get(), 
+        "wishlists" => Wishlist::where('user_id', '=', $user->id)->get()
+      ]);
     }
 
     /**
@@ -68,7 +71,15 @@ class WishlistController extends Controller
      */
     public function update(Request $request, Wishlist $wishlist)
     {
-        //
+      $request->validate([
+        'name' => ['required', 'max:255'],
+      ]);
+
+      $wishlist->update([
+        'name' => $request->input('name')
+      ]);
+
+      return redirect("wishlist")->with("success", "Wishlist's name successfully changed");
     }
 
     /**
@@ -79,6 +90,30 @@ class WishlistController extends Controller
       $wishlist->delete();
 
       return redirect("wishlist")->with("success", "Wishlist deleted successfully");
+    }
+
+    public function itemStore($productId)
+    {
+      $user = auth('web')->user();
+      $wishlist = Wishlist::firstOrCreate([
+          'user_id' => $user->id,
+          'name' => $user->name . "'s 1st wishlist"
+      ]);
+
+      WishlistItem::create([
+        "wishlist_id" => $wishlist->id,
+        "product_id" => $productId,
+      ]);
+
+      return redirect("product")->with("success", "Product successfully added to wishlist");
+    }
+
+    public function itemUpdate(Request $request, WishlistItem $wishlistItem){
+      $wishlistItem->update([
+        'wishlist_id' => $request->input('wishlist-id')
+      ]);
+
+      return back()->with("success", "Product successfully moved");
     }
 
     public function itemDestroy(WishlistItem $wishlistItem){

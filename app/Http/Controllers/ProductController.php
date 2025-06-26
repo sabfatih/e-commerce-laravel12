@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductImage;
+use App\Models\WishlistItem;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -13,7 +14,17 @@ class ProductController extends Controller
      */
     public function index()
     {
-      return view('components.product.index', ["products" => Product::all()]);
+      $user = auth('web')->user();
+
+      $products = Product::all();
+
+      // $wishlistedProductIdByCurrentUser = WishlistItem::whereHas('wishlist', function($query) use ($user) {
+      //   $query->where('user_id', '=', $user->id);
+      // })->pluck('product_id')->toArray();
+
+      // dd($wishlistedProductIdByCurrentUser);
+
+      return view('components.product.index', ["products" => $products]);
     }
 
     /**
