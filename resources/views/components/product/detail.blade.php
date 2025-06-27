@@ -337,230 +337,111 @@
         </div>
     </main>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <!-- Related Products -->
     <section class="container mx-auto px-4 py-8">
         <h2 class="text-2xl font-bold text-gray-800 mb-6">You May Also Like</h2>
         <div
-        x-data="lazyLoader({{ $product->categories->pluck('id') }})"
+        x-data="lazyLoader('{{ $product->id }}', {{ $product->categories->pluck('id') }})"
         x-intersect.once="load()"
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <!-- Product 1 -->
             <template x-for="item in items">
-              <div class="bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+              <a :href="`{{ route('product.show', ':id') }}`.replace(':id', item.id)" class="bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
                   <div class="p-4">
                       <img src="https://images.unsplash.com/photo-1545127398-14699f92334b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80" 
                             alt="Wireless Earbuds" 
-                            class="w-full h-48 object-contain mb-4">
+                            class="w-full h-48 object-cover mb-4">
                       <h3 x-text="item.name" class="font-medium text-gray-800 mb-1"></h3>
                       <div class="text-blue-600 font-semibold">$<span x-text="item.price"></span></div>
                   </div>
-              </div>
+              </a>
             </template>
-            
-            {{-- <!-- Product 2 -->
-            <div class="bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
-                <div class="p-4">
-                    <img src="https://images.unsplash.com/photo-1504274066651-8d31a536b11a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80" 
-                          alt="Smart Watch" 
-                          class="w-full h-48 object-contain mb-4">
-                    <h3 class="font-medium text-gray-800 mb-1">Minimalist Smart Watch</h3>
-                    <div class="text-blue-600 font-semibold">$179.99</div>
-                </div>
-            </div>
-            
-            <!-- Product 3 -->
-            <div class="bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
-                <div class="p-4">
-                    <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=685&q=80" 
-                          alt="Portable Speaker" 
-                          class="w-full h-48 object-contain mb-4">
-                    <h3 class="font-medium text-gray-800 mb-1">Portable Bluetooth Speaker</h3>
-                    <div class="text-blue-600 font-semibold">$89.99</div>
-                </div>
-            </div>
-            
-            <!-- Product 4 -->
-            <div class="bg-white rounded-xl shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
-                <div class="p-4">
-                    <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1032&q=80" 
-                          alt="Wireless Charger" 
-                          class="w-full h-48 object-contain mb-4">
-                    <h3 class="font-medium text-gray-800 mb-1">Wireless Charging Pad</h3>
-                    <div class="text-blue-600 font-semibold">$39.99</div>
-                </div>
-            </div> --}}
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">FaStore</h3>
-                    <p class="text-gray-400">
-                        Premium electronics with minimalist design and exceptional quality.
-                    </p>
-                </div>
-                
-                <div>
-                    <h4 class="font-semibold mb-4">Shop</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white">Headphones</a></li>
-                        <li><a href="#" class="hover:text-white">Speakers</a></li>
-                        <li><a href="#" class="hover:text-white">Wearables</a></li>
-                        <li><a href="#" class="hover:text-white">Accessories</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-semibold mb-4">Support</h4>
-                    <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white">Contact Us</a></li>
-                        <li><a href="#" class="hover:text-white">FAQs</a></li>
-                        <li><a href="#" class="hover:text-white">Shipping</a></li>
-                        <li><a href="#" class="hover:text-white">Returns</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-semibold mb-4">Newsletter</h4>
-                    <p class="text-gray-400 mb-3">Subscribe for updates and offers</p>
-                    <div class="flex">
-                        <input type="email" placeholder="Your email" class="px-3 py-2 rounded-l text-gray-800 w-full">
-                        <button class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-r">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400">
-                <p>&copy; 2023 Minimalist. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Change main product image
-        function changeImage(src) {
-            const mainImg = document.getElementById('mainImage');
-            
-            mainImg.src = src;
-            
-            // Update active thumbnail
-            document.querySelectorAll('.thumbnail').forEach(thumb => {
-                thumb.classList.remove('active');
-            });
-            event.currentTarget.classList.add('active');
-        }
-        
-        // Change tabs
-        const changeTab = (index) => {
-          document.querySelectorAll('.tab-button').forEach((button,i) => {
-            if(i == index){
-              button.classList.add('active');
-            }else{
-              button.classList.remove('active');
-            }
-          });
-
-          document.querySelectorAll('.tab-content > div').forEach((div, i) => {
-            if(i == index){
-              div.classList.remove('hidden')
-            }else{
-              div.classList.add('hidden')
-            }
-          });
-        }
-        
-        // Add to cart animation
-        document.querySelector('.add-to-cart').addEventListener('click', function() {
-            this.innerHTML = '<i class="fas fa-check mr-2"></i> Added to Cart';
-            this.classList.remove('bg-blue-600', 'hover:bg-blue-700', 'cursor-pointer');
-            this.classList.add('bg-green-500');
-            this.disabled = true;
-        });
-
-        // "You may also like" feature with lazy loading
-
-
-        // query 'generator' that can handle array
-        const toQueryString = (obj) => {
-          const params = new URLSearchParams();
-
-          for(const key in obj){
-            const value = obj[key];
-
-            if(Array.isArray(value)){
-              value.forEach(v => {
-                params.append(`${key}[]`, v);
+    @push('scripts-body') 
+      <script>
+          // Change main product image
+          function changeImage(src) {
+              const mainImg = document.getElementById('mainImage');
+              
+              mainImg.src = src;
+              
+              // Update active thumbnail
+              document.querySelectorAll('.thumbnail').forEach(thumb => {
+                  thumb.classList.remove('active');
               });
-            }else if(value !== undefined && value !== null){
-              params.append(key, value);
-            }
+              event.currentTarget.classList.add('active');
+          }
+          
+          // Change tabs
+          const changeTab = (index) => {
+            document.querySelectorAll('.tab-button').forEach((button,i) => {
+              if(i == index){
+                button.classList.add('active');
+              }else{
+                button.classList.remove('active');
+              }
+            });
 
+            document.querySelectorAll('.tab-content > div').forEach((div, i) => {
+              if(i == index){
+                div.classList.remove('hidden')
+              }else{
+                div.classList.add('hidden')
+              }
+            });
+          }
+          
+          // Add to cart animation
+          document.querySelector('.add-to-cart').addEventListener('click', function() {
+              this.innerHTML = '<i class="fas fa-check mr-2"></i> Added to Cart';
+              this.classList.remove('bg-blue-600', 'hover:bg-blue-700', 'cursor-pointer');
+              this.classList.add('bg-green-500');
+              this.disabled = true;
+          });
+
+          // "You may also like" feature with lazy loading
+
+
+          // query 'generator' that can handle array
+          const toQueryString = (obj) => {
+            const params = new URLSearchParams();
+            
+            for(const key in obj){
+              const value = obj[key];
+              
+              if(Array.isArray(value)){
+                value.forEach(v => {
+                  params.append(`${key}[]`, v);
+                });
+              }else if(value !== undefined && value !== null){
+                params.append(key, value);
+              }
+            }
             return params.toString();
           }
-        }
 
-        const lazyLoader = (categories) => {
+          const lazyLoader = (productId, categories) => {
 
-          const categoriesQuery = toQueryString({categories})
+            const params = toQueryString({productId, categories});
 
-          return {
-            loading: true,
-            items: [],
-            async load() {
-              this.loading = true;
-              const res = await fetch(`/api/product?${categoriesQuery}`);
-              const data = await res.json();
+            return {
+              loading: true,
+              items: [],
+              async load() {
+                this.loading = true;
+                const res = await fetch(`/api/product?${params}`);
+                const data = await res.json();
 
-              this.items = data;
-              this.loading = false;
+                this.items = data;
+                this.loading = false;
+              }
             }
           }
-        }
 
-        
-    </script>
+          
+      </script>
+    @endpush
+
 </x-app-layout>
-
-
-
-
-
-
-
-
-
-
-
-
-
-    

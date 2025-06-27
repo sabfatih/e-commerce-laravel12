@@ -1,4 +1,7 @@
+modern, minimalist, and clean aesthetic, characterized by a content-focused layout with clear visual hierarchy and ample whitespace, a consistent color palette featuring your specified blue primary shades(--color-primary-50: #eff6ff; --color-primary-100: #dbeafe; --color-primary-200: #bfdbfe; --color-primary-300: #93c5fd; --color-primary-400: #60a5fa; --color-primary-500: #3b82f6; --color-primary-600: #2563eb; --color-primary-700: #1d4ed8; --color-primary-800: #1e40af; --color-primary-900: #1e3a8a; --color-primary-950: #172554;) as vibrant accents for interactive elements like buttons and links against clean white or light backgrounds, and a cohesive, legible typography system primarily utilizing the combination of 'DM Sans', 'Rubik', and 'Inter' font for all text to ensure a sleek and intuitive user experience. responsive, semantic, interactive with some animation, using tailwind
 
+text-gray-800
+text-gray-100
 
 
 multiple product images

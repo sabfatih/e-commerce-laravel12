@@ -1,21 +1,20 @@
 <nav class="bg-white shadow-sm py-4">
   <div class="container mx-auto px-4 flex justify-between items-center">
       <div class="flex items-center">
-          <h1 class="text-xl font-bold text-gray-800">MINIMALIST</h1>
+          <h1 class="text-xl font-bold text-gray-800">FaStore</h1>
       </div>
       <nav class="hidden md:flex space-x-8">
-          <a href="#" class="text-gray-600 hover:text-gray-900">Home</a>
-          <a href="#" class="text-gray-600 hover:text-gray-900">Products</a>
-          <a href="#" class="text-gray-600 hover:text-gray-900">Collections</a>
-          <a href="#" class="text-gray-600 hover:text-gray-900">About</a>
+          <a href="{{ route('home') }}" class="text-gray-600 hover:text-gray-900">Home</a>
+          <a href="{{ route('product.index') }}" class="text-gray-600 hover:text-gray-900">Products</a>
+          <a href="{{ route('about') }}" class="text-gray-600 hover:text-gray-900">About</a>
       </nav>
       <div class="flex items-center space-x-4">
           <button class="text-gray-600 hover:text-gray-900">
               <i class="fas fa-search"></i>
           </button>
-          <button class="text-gray-600 hover:text-gray-900">
+          <a href="{{ route('cartItem.index') }}" class="text-gray-600 hover:text-gray-900">
               <i class="fas fa-shopping-bag"></i>
-          </button>
+          </a>
           <button class="md:hidden text-gray-600 hover:text-gray-900">
               <i class="fas fa-bars"></i>
           </button>
