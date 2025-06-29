@@ -41,7 +41,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
   Route::get('/asaa/{as}')->name('category.show');
 
   Route::get('/about/{content?}', function($content = null) {
-    if(!isset($content)){
+    if(!isset($content) || !in_array(strtolower($content), ['about','faqs', 'terms-condition', 'privacy', 'contact-us'])){
       return view('components.about.about');
     }else if(strtolower($content) == 'faqs'){
       $faqs = [

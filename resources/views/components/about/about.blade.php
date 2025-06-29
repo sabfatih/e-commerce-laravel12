@@ -5,11 +5,11 @@
         <h1 class="text-5xl md:text-6xl font-bold mb-6">Our Story at <span class="text-primary-600 block">FaStore</span></h1>
         <p class="text-gray-400 text-base md:text-lg">Founded in 2015, FaStore has grown from a small startup to a leading e-commerce platform, serving millions of customers worldwide with quality products and exceptional service.</p>
   
-        <div class="flex flex-col md:flex-row gap-4 mt-8">
-          <a href="{{ route('product.index') }}" class="w-full md:min-w-40 px-8 py-4 rounded-md bg-primary-600 shadow-md hover:-translate-y-[1px] hover:shadow-xl hover:bg-primary-700 active:bg-primary-600 transition-all text-lg whitespace-nowrap font-[500] text-gray-100 text-center cursor-pointer">
+        <div class="flex flex-col sm:flex-row gap-4 mt-8">
+          <a href="{{ route('product.index') }}" class="w-full sm:min-w-40 px-8 py-4 rounded-md bg-primary-600 shadow-md hover:-translate-y-[1px] hover:shadow-xl hover:bg-primary-700 active:bg-primary-600 transition-all text-lg whitespace-nowrap font-[500] text-gray-100 text-center cursor-pointer">
             Shop now
           </a>
-          <button onclick="document.getElementById('mission').scrollIntoView()" class="w-full md:min-w-40 px-8 py-4 rounded-md bg-primary-100 shadow-md hover:-translate-y-[1px] hover:shadow-xl hover:bg-primary-200 active:bg-primary-100 transition-all text-lg whitespace-nowrap font-[500] text-primary-600 text-center cursor-pointer">
+          <button onclick="document.getElementById('mission').scrollIntoView()" class="w-full sm:min-w-40 px-8 py-4 rounded-md bg-primary-100 shadow-md hover:-translate-y-[1px] hover:shadow-xl hover:bg-primary-200 active:bg-primary-100 transition-all text-lg whitespace-nowrap font-[500] text-primary-600 text-center cursor-pointer">
             Learn more
           </button>
         </div>
@@ -95,9 +95,9 @@
         <p class="max-w-lg text-base md:text-xl text-center text-gray-400 mx-auto">A diverse team of passionate professionals dedicated to revolutionizing e-commerce.</p>
       </header>
 
-      <div class="px-2 grid grid-cols-2 md:grid-cols-3 mx-auto justify-between gap-x-4 md:gap-x-10 gap-y-6 max-w-11/12">
-        <div class="rounded-md w-full min-h-48 md:min-h-68 shadow hover:-translate-y-1 hover:shadow-md transition-all">
-          <img src="#" alt="#" class="rounded-t-md w-full h-1/3 md:h-1/2 object-cover border-b border-black/10">
+      <div class="px-2 grid grid-cols-2 sm:grid-cols-3 mx-auto justify-between gap-x-4 md:gap-x-10 gap-y-6 max-w-11/12">
+        <div class="rounded-md w-full min-h-56 md:min-h-68 shadow hover:-translate-y-1 hover:shadow-md transition-all">
+          <img src="#" alt="#" class="rounded-t-md w-full h-28 md:h-34 object-cover border-b border-black/10">
 
           <article class="px-3 md:px-4 py-2 md:py-2.5 space-y-1">
             <h3 class="text-primary-600 font-[500] text-xs md:text-base">CEO and Founder</h3>
@@ -106,8 +106,8 @@
           </article>
         </div>
 
-        <div class="rounded-md w-full min-h-48 md:min-h-68 shadow hover:-translate-y-1 hover:shadow-md transition-all">
-          <img src="#" alt="#" class="rounded-t-md w-full h-1/3 md:h-1/2 object-cover border-b border-black/10">
+        <div class="rounded-md w-full min-h-56 md:min-h-68 shadow hover:-translate-y-1 hover:shadow-md transition-all">
+          <img src="#" alt="#" class="rounded-t-md w-full h-28 md:h-34 object-cover border-b border-black/10">
 
           <article class="px-3 md:px-4 py-2 md:py-2.5 space-y-1">
             <h3 class="text-primary-600 font-[500] text-xs md:text-base">CTO</h3>
@@ -116,8 +116,8 @@
           </article>
         </div>
 
-        <div class="rounded-md w-full min-h-48 md:min-h-68 shadow hover:-translate-y-1 hover:shadow-md transition-all">
-          <img src="#" alt="#" class="rounded-t-md w-full h-1/3 md:h-1/2 object-cover border-b border-black/10">
+        <div class="rounded-md w-full min-h-56 md:min-h-68 shadow hover:-translate-y-1 hover:shadow-md transition-all">
+          <img src="#" alt="#" class="rounded-t-md w-full h-28 md:h-34 object-cover border-b border-black/10">
 
           <article class="px-3 md:px-4 py-2 md:py-2.5 space-y-1">
             <h3 class="text-primary-600 font-[500] text-xs md:text-base">Head of Design</h3>
