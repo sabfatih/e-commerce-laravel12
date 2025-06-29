@@ -14,7 +14,7 @@ use App\Http\Controllers\WishlistController;
 use App\Http\Controllers\WishlistItemController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 })->name('home');
 
 Route::get('/dashboard', function () {

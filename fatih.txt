@@ -13,3 +13,8 @@ multiple product images
 fitur "You may also like" di detail produk:
 Lazy load
 1. Ketika user scroll sampai section tertentu, fetch data 'products' yang 'categories'nya mirip dengan product yang ditampilkan saat itu
+
+4 images
+fokus di image ke 3
+jika user click prev, pindahkan image ke 4 ke urutan ke 1
+jika user click next, pindahkan image ke 1 ke urutan ke 4
