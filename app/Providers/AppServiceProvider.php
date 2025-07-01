@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
         return Category::take(4)->get();
       });
 
-      view()->composer('layouts.app', function ($view) use ($footerCategories) {
+      view()->composer(['layouts.app', 'layouts.guest'], function ($view) use ($footerCategories) {
           $view->with('footerCategories', $footerCategories);
       });
     }

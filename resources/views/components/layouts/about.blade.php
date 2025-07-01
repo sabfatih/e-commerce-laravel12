@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="scroll-smooth max-h-full">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="max-h-full">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,7 +21,7 @@
         @endphp
 
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <nav class="bg-white shadow-sm py-4 fixed w-full md:static z-10">
+            <nav class="bg-white shadow-sm py-4 sticky top-0 w-full md:static z-10">
               <div class="container mx-auto px-4 flex justify-between items-center">
                   <a href="{{ route('home') }}" class="flex items-center">
                       <h1 class="text-xl md:text-2xl font-bold text-gray-800">FaStore</h1>
@@ -68,7 +68,7 @@
                         <div class="md:col-start-4">
                             <h4 class="font-semibold mb-4">Find us on social media</h4>
                             <div class="flex w-full justify-start items-center gap-x-8">
-                                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=fatihsabihisma2@gmail.com" class="hover:-translate-y-[1px] hover:text-primary-400 transition-all">
+                                <a href="https://www.instagram.com/sabfatiih" class="hover:-translate-y-[1px] hover:text-primary-400 transition-all">
                                   <i class="fab fa-instagram text-2xl"></i>
                                 </a>
                                 <a href="" class="hover:-translate-y-[1px] hover:text-primary-400 transition-all">

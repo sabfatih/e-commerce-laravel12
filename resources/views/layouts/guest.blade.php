@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="max-h-full">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,6 +25,8 @@
 
             <!-- Page Content -->
               {{ $slot }}
+            
+              @include('layouts.footer')
         </div>
     </body>
 </html>

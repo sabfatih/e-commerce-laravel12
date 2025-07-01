@@ -29,9 +29,17 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
   Route::resource('product', ProductController::class)->middleware(isAdmin::class);
-  Route::get('/api/product', function(Request $request){
-    $categories = $request->categories;
-    $productId = $request->productId;
+
+  // Products in home page
+  Route::get('/api/product', function(){
+
+    
+    
+  });
+  // Related products in detail products
+  Route::get('/api/product/related', function(){
+    $categories = request()->categories;
+    $productId = request()->productId;
     $products = Product::wherehas('categories', function($query) use ($categories) {
       $query->whereIn('id', $categories);
     })->where('id', '!=', $productId)->inRandomOrder()->limit(8)->get();

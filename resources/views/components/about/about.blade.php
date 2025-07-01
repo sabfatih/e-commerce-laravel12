@@ -9,7 +9,7 @@
           <a href="{{ route('product.index') }}" class="w-full sm:min-w-40 px-8 py-4 rounded-md bg-primary-600 shadow-md hover:-translate-y-[1px] hover:shadow-xl hover:bg-primary-700 active:bg-primary-600 transition-all text-lg whitespace-nowrap font-[500] text-gray-100 text-center cursor-pointer">
             Shop now
           </a>
-          <button onclick="document.getElementById('mission').scrollIntoView()" class="w-full sm:min-w-40 px-8 py-4 rounded-md bg-primary-100 shadow-md hover:-translate-y-[1px] hover:shadow-xl hover:bg-primary-200 active:bg-primary-100 transition-all text-lg whitespace-nowrap font-[500] text-primary-600 text-center cursor-pointer">
+          <button onclick="document.getElementById('mission').scrollIntoView({behavior: 'smooth'})" class="w-full sm:min-w-40 px-8 py-4 rounded-md bg-primary-100 shadow-md hover:-translate-y-[1px] hover:shadow-xl hover:bg-primary-200 active:bg-primary-100 transition-all text-lg whitespace-nowrap font-[500] text-primary-600 text-center cursor-pointer">
             Learn more
           </button>
         </div>

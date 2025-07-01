@@ -431,7 +431,7 @@
               items: [],
               async load() {
                 this.loading = true;
-                const res = await fetch(`/api/product?${params}`);
+                const res = await fetch(`/api/product/related?${params}`);
                 const data = await res.json();
 
                 this.items = data;
