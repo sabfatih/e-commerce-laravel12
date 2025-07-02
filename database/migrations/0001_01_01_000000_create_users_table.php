@@ -21,6 +21,7 @@ return new class extends Migration
             $table->boolean('is_admin')->default(false);
             $table->text('address')->nullable();
             $table->string('phone')->nullable();
+            $table->string('image_url')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

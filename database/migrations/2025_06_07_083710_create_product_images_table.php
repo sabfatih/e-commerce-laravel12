@@ -15,6 +15,7 @@ return new class extends Migration
         $table->uuid('id')->primary();
         $table->uuid('product_id');
         $table->string('image_url');
+        $table->string('thumb_url');
         $table->boolean('is_primary')->default(false);
         $table->timestamps();
 

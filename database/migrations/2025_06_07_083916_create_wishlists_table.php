@@ -14,6 +14,7 @@ return new class extends Migration
       Schema::create('wishlists', function (Blueprint $table) {
         $table->uuid('id')->primary();
         $table->uuid('user_id');
+        $table->string('slug');
         $table->string('name')->default('New Wishlist');
         $table->timestamps();
 
