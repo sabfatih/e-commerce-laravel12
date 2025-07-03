@@ -7,16 +7,16 @@ class="bg-white text-gray-800 shadow-sm py-3 md:py-4 sticky top-0 z-40">
       <a href="{{ route('home') }}" class="items-center hidden md:flex">
           <h1 class="text-xl font-bold text-gray-800">FaStore</h1>
       </a>
-      <div x-data="{searchQuery: ''}" class="grow flex gap-x-2">
+      <div x-data="{search: ''}" class="grow flex gap-x-2">
         <input 
-        x-on:keydown.enter="window.location.href= `/search?q=${encodeURIComponent(searchQuery)}`"
-        x-model="searchQuery"
+        x-on:keydown.enter="window.location.href= `/product?search=${encodeURIComponent(search)}`"
+        x-model="search"
         type="text" class="w-full text-sm max-w-lg border-none rounded-lg ring-1 focus:ring-2 ring-black/20 focus:ring-primary-400 transition-all shadow focus:shadow-md peer" placeholder="Search for products">
       </div>
       <div class="hidden gap-x-6 md:flex">
           <div class="items-center gap-x-4 hidden md:flex">
             @auth
-            @if (Route::is('home'))
+            @if (Route::is(['home', 'product.index']))
             <button x-on:click="openQuickCart = true" class="text-gray-600 hover:text-gray-900 cursor-pointer">
               <i class="fas fa-shopping-bag"></i>
             </button>
@@ -106,7 +106,7 @@ class="bg-white text-gray-800 shadow-sm py-3 md:py-4 sticky top-0 z-40">
                     <i class="fas fa-minus m-auto text-sm"></i>
                   </button>
                   <div>
-                    <input :value="qty" x-on:change="qty = event.target.value" x-on:input="qty = sanitazeNumber(event.target, minOrder, maxOrder)" min="0" max="999" step="1" type="number" name="quantity" id="quantity-cart-item" class="border-y border-x-0 border-black/20 w-10 h-8 text-center p-0 self-end my-auto text-sm focus:ring-0" autocomplete="off">
+                    <input :value="qty" x-on:change="qty = event.target.value" x-on:input="qty = sanitazeQuantity(event.target, minOrder, maxOrder)" min="0" max="999" step="1" type="number" name="quantity" id="quantity-cart-item" class="border-y border-x-0 border-black/20 w-10 h-8 text-center p-0 self-end my-auto text-sm focus:ring-0" autocomplete="off">
                   </div>
                   <button x-on:click="increment();" :disabled="qty >= maxOrder" class="flex cursor-pointer disabled:cursor-default p-1.5 rounded-r-full border border-black/20 border-l-0 disabled:text-gray-300 transition-all">
                     <i class="fas fa-plus m-auto text-sm"></i>
@@ -146,7 +146,7 @@ class="bg-white text-gray-800 shadow-sm py-3 md:py-4 sticky top-0 z-40">
                     <i class="fas fa-minus m-auto text-sm"></i>
                   </button>
                   <div>
-                    <input :value="qty" x-on:change="qty = event.target.value" x-on:input="qty = sanitazeNumber(event.target, minOrder, maxOrder)" min="0" max="999" step="1" type="number" name="quantity" id="quantity-cart-item" class="border-y border-x-0 border-black/20 w-10 h-8 text-center p-0 self-end my-auto text-sm focus:ring-0" autocomplete="off">
+                    <input :value="qty" x-on:change="qty = event.target.value" x-on:input="qty = sanitazeQuantity(event.target, minOrder, maxOrder)" min="0" max="999" step="1" type="number" name="quantity" id="quantity-cart-item" class="border-y border-x-0 border-black/20 w-10 h-8 text-center p-0 self-end my-auto text-sm focus:ring-0" autocomplete="off">
                   </div>
                   <button x-on:click="increment();" :disabled="qty >= maxOrder" class="flex cursor-pointer disabled:cursor-default p-1.5 rounded-r-full border border-black/20 border-l-0 disabled:text-gray-300 transition-all">
                     <i class="fas fa-plus m-auto text-sm"></i>
@@ -194,7 +194,7 @@ class="bg-white text-gray-800 shadow-sm py-3 md:py-4 sticky top-0 z-40">
                     <i class="fas fa-minus m-auto text-sm"></i>
                   </button>
                   <div>
-                    <input :value="qty" x-on:change="qty = event.target.value" x-on:input="qty = sanitazeNumber(event.target, minOrder, maxOrder)" min="0" max="999" step="1" type="number" name="quantity" id="quantity-cart-item" class="border-y border-x-0 border-black/20 w-10 h-8 text-center p-0 self-end my-auto text-sm focus:ring-0" autocomplete="off">
+                    <input :value="qty" x-on:change="qty = event.target.value" x-on:input="qty = sanitazeQuantity(event.target, minOrder, maxOrder)" min="0" max="999" step="1" type="number" name="quantity" id="quantity-cart-item" class="border-y border-x-0 border-black/20 w-10 h-8 text-center p-0 self-end my-auto text-sm focus:ring-0" autocomplete="off">
                   </div>
                   <button x-on:click="increment();" :disabled="qty >= maxOrder" class="flex cursor-pointer disabled:cursor-default p-1.5 rounded-r-full border border-black/20 border-l-0 disabled:text-gray-300 transition-all">
                     <i class="fas fa-plus m-auto text-sm"></i>
@@ -234,7 +234,7 @@ class="bg-white text-gray-800 shadow-sm py-3 md:py-4 sticky top-0 z-40">
                     <i class="fas fa-minus m-auto text-sm"></i>
                   </button>
                   <div>
-                    <input :value="qty" x-on:change="qty = event.target.value" x-on:input="qty = sanitazeNumber(event.target, minOrder, maxOrder)" min="0" max="999" step="1" type="number" name="quantity" id="quantity-cart-item" class="border-y border-x-0 border-black/20 w-10 h-8 text-center p-0 self-end my-auto text-sm focus:ring-0" autocomplete="off">
+                    <input :value="qty" x-on:change="qty = event.target.value" x-on:input="qty = sanitazeQuantity(event.target, minOrder, maxOrder)" min="0" max="999" step="1" type="number" name="quantity" id="quantity-cart-item" class="border-y border-x-0 border-black/20 w-10 h-8 text-center p-0 self-end my-auto text-sm focus:ring-0" autocomplete="off">
                   </div>
                   <button x-on:click="increment();" :disabled="qty >= maxOrder" class="flex cursor-pointer disabled:cursor-default p-1.5 rounded-r-full border border-black/20 border-l-0 disabled:text-gray-300 transition-all">
                     <i class="fas fa-plus m-auto text-sm"></i>
@@ -282,7 +282,7 @@ class="bg-white text-gray-800 shadow-sm py-3 md:py-4 sticky top-0 z-40">
                     <i class="fas fa-minus m-auto text-sm"></i>
                   </button>
                   <div>
-                    <input :value="qty" x-on:change="qty = event.target.value" x-on:input="qty = sanitazeNumber(event.target, minOrder, maxOrder)" min="0" max="999" step="1" type="number" name="quantity" id="quantity-cart-item" class="border-y border-x-0 border-black/20 w-10 h-8 text-center p-0 self-end my-auto text-sm focus:ring-0" autocomplete="off">
+                    <input :value="qty" x-on:change="qty = event.target.value" x-on:input="qty = sanitazeQuantity(event.target, minOrder, maxOrder)" min="0" max="999" step="1" type="number" name="quantity" id="quantity-cart-item" class="border-y border-x-0 border-black/20 w-10 h-8 text-center p-0 self-end my-auto text-sm focus:ring-0" autocomplete="off">
                   </div>
                   <button x-on:click="increment();" :disabled="qty >= maxOrder" class="flex cursor-pointer disabled:cursor-default p-1.5 rounded-r-full border border-black/20 border-l-0 disabled:text-gray-300 transition-all">
                     <i class="fas fa-plus m-auto text-sm"></i>
@@ -322,7 +322,7 @@ class="bg-white text-gray-800 shadow-sm py-3 md:py-4 sticky top-0 z-40">
                     <i class="fas fa-minus m-auto text-sm"></i>
                   </button>
                   <div>
-                    <input :value="qty" x-on:change="qty = event.target.value" x-on:input="qty = sanitazeNumber(event.target, minOrder, maxOrder)" min="0" max="999" step="1" type="number" name="quantity" id="quantity-cart-item" class="border-y border-x-0 border-black/20 w-10 h-8 text-center p-0 self-end my-auto text-sm focus:ring-0" autocomplete="off">
+                    <input :value="qty" x-on:change="qty = event.target.value" x-on:input="qty = sanitazeQuantity(event.target, minOrder, maxOrder)" min="0" max="999" step="1" type="number" name="quantity" id="quantity-cart-item" class="border-y border-x-0 border-black/20 w-10 h-8 text-center p-0 self-end my-auto text-sm focus:ring-0" autocomplete="off">
                   </div>
                   <button x-on:click="increment();" :disabled="qty >= maxOrder" class="flex cursor-pointer disabled:cursor-default p-1.5 rounded-r-full border border-black/20 border-l-0 disabled:text-gray-300 transition-all">
                     <i class="fas fa-plus m-auto text-sm"></i>
@@ -370,7 +370,7 @@ class="bg-white text-gray-800 shadow-sm py-3 md:py-4 sticky top-0 z-40">
                     <i class="fas fa-minus m-auto text-sm"></i>
                   </button>
                   <div>
-                    <input :value="qty" x-on:change="qty = event.target.value" x-on:input="qty = sanitazeNumber(event.target, minOrder, maxOrder)" min="0" max="999" step="1" type="number" name="quantity" id="quantity-cart-item" class="border-y border-x-0 border-black/20 w-10 h-8 text-center p-0 self-end my-auto text-sm focus:ring-0" autocomplete="off">
+                    <input :value="qty" x-on:change="qty = event.target.value" x-on:input="qty = sanitazeQuantity(event.target, minOrder, maxOrder)" min="0" max="999" step="1" type="number" name="quantity" id="quantity-cart-item" class="border-y border-x-0 border-black/20 w-10 h-8 text-center p-0 self-end my-auto text-sm focus:ring-0" autocomplete="off">
                   </div>
                   <button x-on:click="increment();" :disabled="qty >= maxOrder" class="flex cursor-pointer disabled:cursor-default p-1.5 rounded-r-full border border-black/20 border-l-0 disabled:text-gray-300 transition-all">
                     <i class="fas fa-plus m-auto text-sm"></i>
@@ -410,7 +410,7 @@ class="bg-white text-gray-800 shadow-sm py-3 md:py-4 sticky top-0 z-40">
                     <i class="fas fa-minus m-auto text-sm"></i>
                   </button>
                   <div>
-                    <input :value="qty" x-on:change="qty = event.target.value" x-on:input="qty = sanitazeNumber(event.target, minOrder, maxOrder)" min="0" max="999" step="1" type="number" name="quantity" id="quantity-cart-item" class="border-y border-x-0 border-black/20 w-10 h-8 text-center p-0 self-end my-auto text-sm focus:ring-0" autocomplete="off">
+                    <input :value="qty" x-on:change="qty = event.target.value" x-on:input="qty = sanitazeQuantity(event.target, minOrder, maxOrder)" min="0" max="999" step="1" type="number" name="quantity" id="quantity-cart-item" class="border-y border-x-0 border-black/20 w-10 h-8 text-center p-0 self-end my-auto text-sm focus:ring-0" autocomplete="off">
                   </div>
                   <button x-on:click="increment();" :disabled="qty >= maxOrder" class="flex cursor-pointer disabled:cursor-default p-1.5 rounded-r-full border border-black/20 border-l-0 disabled:text-gray-300 transition-all">
                     <i class="fas fa-plus m-auto text-sm"></i>
@@ -440,7 +440,7 @@ class="bg-white text-gray-800 shadow-sm py-3 md:py-4 sticky top-0 z-40">
 </nav>
 
 <script>
-  const sanitazeNumber = (element, minOrder, maxOrder) => {
+  const sanitazeQuantity = (element, minOrder, maxOrder) => {
     element.value = element.value.replace(/[^0-9]/g, '');
     if(element.value != ''){
       let val = parseInt(element.value);

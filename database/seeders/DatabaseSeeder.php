@@ -36,15 +36,35 @@ class DatabaseSeeder extends Seeder
     $users = User::factory(7)->create();
     $allUsers = $users->push($userFatih);
 
-    // 2. Buat categories custom (7 kategori umum)
+    // 2. Store
+    $storeFastore = Store::factory()->create([
+      'user_id' => $userFatih->id,
+      'name' => 'Official FaStore',
+      'image_url' => 'store-images/78b5f2e7f20ae23ab2d5e36191e92ff2.jpg',
+      'is_active' => true,
+    ]);
+
+    $stores = [$storeFastore];
+    foreach ($users as $user) {
+      if(rand(0,1)){
+        $stores[] = Store::factory()->create([
+          'user_id' => $user->id,
+          'name' => $user->name . "'s Store"
+        ]);
+      }
+    }
+
+    // 3. Buat categories custom (7 kategori umum)
     $categoryNames = ['Clothes', 'Furniture', 'Electronics', 'Books', 'Toys', 'Foods', 'Beauty'];
     $categories = collect();
     foreach ($categoryNames as $name) {
       $categories->push(Category::factory()->create(['name' => $name, 'slug' => Str::slug($name)]));
     }
 
-    // 3. Buat products dan attach ke categories
-    $products = Product::factory(40)->create();
+    // 4. Buat products dgn store_id-nya dan attach ke categories
+    $products = Product::factory(40)->create([
+      'store_id' => $stores[array_rand($stores)]
+    ]);
     $products->each(function ($product) use ($categories) {
       $product->categories()->attach(
         $categories->random(rand(1, 3))->pluck('id')->toArray()
@@ -52,7 +72,7 @@ class DatabaseSeeder extends Seeder
     });
     
 
-    // 4. Product images (1-4 gambar per product)
+    // 5. Product images (1-4 gambar per product)
 
     $imageFiles = [
         'product-images/74d32ac83b5436d8e5b896f61ae3fc66.jpg',
@@ -81,7 +101,6 @@ class DatabaseSeeder extends Seeder
         'product-images/d3949d62c0f6c6c43ab3098fabc54570.jpg',
         'product-images/63b197877fbd179fc533e33be0ea3557.jpg',
         'product-images/6824225874abbe65338958bacd537405.jpg',
-        'product-images/d549abd254468391fc45a59dc9a2b5c1.jpg',
         'product-images/2d210a2d0cef7d1434fa852708056393.jpg',
         'product-images/54768f10f262261baebee5aca63879d2.jpg',
         'product-images/adfcfb7847b6e5b2700b26317532bfad.jpg',
@@ -98,6 +117,7 @@ class DatabaseSeeder extends Seeder
         'product-images/55fe4e4be9be803189e324c346718473.jpg',
         'product-images/4350a735510dd1849284ed4c3aa9b585.jpg',
         'product-images/e9a0903348e5513ccb8d360a9a688d44.jpg',
+        'product-images/be42943f0b2045ce4992033e6217ed4f.jpg',
     ];
 
     shuffle($imageFiles);
@@ -108,6 +128,7 @@ class DatabaseSeeder extends Seeder
       ProductImage::create([
         'product_id' => $product->id, 
         'image_url' => $image_url,
+        'thumb_url' => str_replace('product-images', 'product-thumbs',$image_url),
         'is_primary' => true,
       ]);
       ProductImage::factory(rand(0, 3))->create([
@@ -201,23 +222,6 @@ class DatabaseSeeder extends Seeder
           'product_id' => $product->id,
         ]);
         $reviewPairs->push($key);
-      }
-    }
-
-    // 12. Store
-    $storeFastore = Store::factory()->create([
-      'user_id' => $userFatih->id,
-      'name' => 'Official FaStore',
-      'image_url' => 'store-images/78b5f2e7f20ae23ab2d5e36191e92ff2.jpg',
-      'is_active' => true,
-    ]);
-
-    foreach ($allUsers as $user) {
-      if(rand(0,1)){
-        Wishlist::factory()->create([
-          'user_id' => $user->id,
-          'name' => $user->name . "'s Store"
-        ]);
       }
     }
 

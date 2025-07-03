@@ -18,16 +18,18 @@ class ProductController extends Controller
 
       $products = Product::all();
 
+      $productImages = ProductImage::where('is_primary', true)->pluck('image_url','product_id')->map(fn($url) => str_replace('product-images/', '', $url));
+
+      // dd($productImages->toArray());
+
       $wishlistedProductIdByCurrentUser = WishlistItem::whereHas('wishlist', function($query) use ($user) {
         $query->where('user_id', '=', $user->id);
       })->pluck('product_id','id')->toArray();
-
-      // $products->transform(function($product) use ($wishlistedProductIdByCurrentUser) {
-      //   $product->is_wishlisted = in_array($product->id, $wishlistedProductIdByCurrentUser);
-      //   return $product;
-      // });
       
-      return view('components.product.index', ["products" => $products, "wishlistedProductIdByCurrentUser" => $wishlistedProductIdByCurrentUser]);
+      return view('components.product.index', [
+        "products" => $products, 
+        "productImages" => $productImages,
+        "wishlistedProductIdByCurrentUser" => $wishlistedProductIdByCurrentUser]);
     }
 
     /**
@@ -43,6 +45,21 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+    //   $imagesPath = Storage::disk('public')->files('product-images');
+
+    // // dd($imagesPath);
+
+    // foreach($imagesPath as $imagePath){
+    //   $rawImage = Storage::disk('public')->get($imagePath);
+    //   $fileName = pathinfo($imagePath, PATHINFO_FILENAME);
+    //   $extName = pathinfo($imagePath, PATHINFO_EXTENSION);
+    //   $image = Image::read($rawImage)->scale(width:300);
+
+    //   Storage::disk('public')->put(
+    //       'product-thumbs/' . $fileName . '.' . $extName,
+    //       $image->encodeByExtension($extName, quality: 70)
+    //   );
+    // }
 
       $validatedData = $request->validate([
         "name" => ["required"],

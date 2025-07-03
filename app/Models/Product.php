@@ -32,6 +32,10 @@ class Product extends Model
       return $this->hasMany(WishlistItem::class);
     }
 
+    public function store(){
+      return $this->belongsTo(Store::class);
+    }
+
     protected $fillable = [
       'name', 'slug', 'description', 'price', 'stock', 'weight'
     ];

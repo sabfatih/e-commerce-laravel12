@@ -21,12 +21,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
 
-      $footerCategories = cache()->remember('footer.categories', 60 * 60, function () {
+      $randomCategories = cache()->remember('footer.categories', 60 * 60, function () {
         return Category::take(4)->get();
       });
 
-      view()->composer(['layouts.app', 'layouts.guest'], function ($view) use ($footerCategories) {
-          $view->with('footerCategories', $footerCategories);
-      });
+      view()->share('randomCategories', $randomCategories);
     }
 }

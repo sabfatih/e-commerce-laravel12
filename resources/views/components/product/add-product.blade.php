@@ -49,40 +49,40 @@
       <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md">Add Product</button>
   </form>
 
-<script>
+  <script>
 
-  const previewContainer = document.querySelector("#preview-container");
-  
-  const previewImage = (e) => {
-    if(!e.target.files || !e.target.files[0]) return;
+    const previewContainer = document.querySelector("#preview-container");
+    
+    const previewImage = (e) => {
+      if(!e.target.files || !e.target.files[0]) return;
 
-    for (const [index, file] of Array.from(e.target.files).entries()) {
-        const container = document.createElement('div');
-        container.classList.add('flex', 'flex-col', 'items-center', 'gap-2');
+      for (const [index, file] of Array.from(e.target.files).entries()) {
+          const container = document.createElement('div');
+          container.classList.add('flex', 'flex-col', 'items-center', 'gap-2');
 
-        const img = document.createElement('img');
-        img.src = URL.createObjectURL(file);
-        img.classList.add('w-40', 'object-cover', 'rounded', 'shadow');
+          const img = document.createElement('img');
+          img.src = URL.createObjectURL(file);
+          img.classList.add('w-40', 'object-cover', 'rounded', 'shadow');
 
-        const input = document.createElement('input');
-        input.type = "radio";
-        input.name = "isPrimaryRadio";
-        input.value = index;
-        input.classList.add('peer');
+          const input = document.createElement('input');
+          input.type = "radio";
+          input.name = "isPrimaryRadio";
+          input.value = index;
+          input.classList.add('peer');
 
-        console.log(file);
-        
-        const isPrimaryText = document.createElement('span');
-        isPrimaryText.id = "primary-" + index;
-        isPrimaryText.innerHTML = "Primary";
-        isPrimaryText.classList.add('peer-[&:not(:checked)]:hidden', 'text-sm', 'font-semibold', 'text-blue-500', 'dark:text-blue-300');
+          console.log(file);
+          
+          const isPrimaryText = document.createElement('span');
+          isPrimaryText.id = "primary-" + index;
+          isPrimaryText.innerHTML = "Primary";
+          isPrimaryText.classList.add('peer-[&:not(:checked)]:hidden', 'text-sm', 'font-semibold', 'text-blue-500', 'dark:text-blue-300');
 
-        container.appendChild(img);
-        container.appendChild(input);
-        container.appendChild(isPrimaryText);
+          container.appendChild(img);
+          container.appendChild(input);
+          container.appendChild(isPrimaryText);
 
-        previewContainer.appendChild(container);
+          previewContainer.appendChild(container);
+      }
     }
-  }
-</script>
+  </script>
 </x-layouts.starter>

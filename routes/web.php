@@ -1,17 +1,14 @@
 <?php
 
-use App\Http\Controllers\AboutController;
 use App\Models\Product;
-use Illuminate\Http\Request;
 use App\Http\Middleware\isAdmin;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\CartItemController;
 
+use App\Http\Controllers\CartItemController;
 use App\Http\Controllers\WishlistController;
-use App\Http\Controllers\WishlistItemController;
+
 
 Route::get('/', function () {
     return view('home');

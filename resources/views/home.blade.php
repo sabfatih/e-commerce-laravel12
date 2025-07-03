@@ -79,10 +79,16 @@
 
     {{-- products --}}
     <section class="px-2.5">
-      <h2 class="text-xl md:text-2xl lg:text-3xl font-[500] my-6">Products</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-3 sm:gap-x-4 md:gap-x-6 gap-y-4 md:gap-y-6">
+      <header class="flex justify-between gap-x-6 my-6">
+        <h2 class="text-xl md:text-2xl lg:text-3xl font-[500] my-auto">Products</h2>
+        <a href="{{ route('product.index') }}" class="flex justify-center items-center px-3 py-2 rounded-lg ring-1 ring-black/20 focus:ring-2 focus:ring-primary-500 transition-all cursor-pointer shadow hover:shadow-md">
+          <span class="font-semibold">Filter</span>
+          <i class="fas fa-filter ml-2"></i>
+        </a>
+      </header>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-x-3 sm:gap-x-4 md:gap-x-6 gap-y-4 md:gap-y-6">
         <template x-data="{i: 10}" x-for="items in i">
-          <div class="w-full aspect-[3/4] md:aspect-[3/5] rounded-md shadow bg-white hover:shadow-md transition-all cursor-pointer">
+          <a href="{{ route('product.show', 1) }}" class="w-full aspect-[3/4] md:aspect-[3/5] rounded-md shadow bg-white hover:shadow-md transition-all cursor-pointer">
             <img src="https://images.unsplash.com/photo-1496116218417-1a781b1c416c?q=80&w=1598&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" :alt="'Product-'+items" class="aspect-square rounded-t-md object-cover border-b border-b-black/10">
             <div class="px-3 py-2 space-y-0.5">
               <h3>Tasty Sybau</h3>
@@ -104,7 +110,7 @@
                 </span>
               </span>
             </div>
-          </div>
+          </a>
         </template>
       </div>
       <div class="flex justify-center items-center">

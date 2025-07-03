@@ -11,7 +11,7 @@
             <div>
                 <h4 class="font-semibold mb-4">Shop</h4>
                 <ul class="space-y-2 text-gray-400">
-                  @foreach ($footerCategories as $category)
+                  @foreach ($randomCategories as $category)
                     <li><a href="{{ route('category.show', $category->id) }}" class="hover:text-white">{{ $category->name }}</a></li>
                   @endforeach
                 </ul>

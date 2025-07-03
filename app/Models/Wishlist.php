@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Wishlist extends Model
 {
     /** @use HasFactory<\Database\Factories\WishlistFactory> */
-    use HasFactory;
+    use HasFactory, Sluggable;
 
     public function user(){
       return $this->belongsTo(User::class);
@@ -38,5 +39,16 @@ class Wishlist extends Model
           $model->{$model->getKeyName()} = (string) Str::uuid();
         }
       });
+    }
+
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name',
+                'unique' => true,
+                'uniqueWith' => ['user_id'],
+            ]
+        ];
     }
 }

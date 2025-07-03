@@ -20,7 +20,6 @@ class CategoryFactory extends Factory
         return [
           'id' => (string) Str::uuid(),
           'name' => $name = fake()->name(),
-          'slug' => Str::slug($name) . '-' . fake()->unique()->randomNumber(5),
           'description' => fake()->text(),
         ];
     }

@@ -22,7 +22,6 @@ class WishlistFactory extends Factory
           'id' => (string) Str::uuid(),
           'user_id' => User::factory(),
           'name' => $name = fake()->words(3, true),
-          'slug' => Str::slug($name) . '-' . fake()->unique()->randomNumber(5),
         ];
     }
 }

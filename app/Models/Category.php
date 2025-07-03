@@ -16,6 +16,11 @@ class Category extends Model
       return $this->belongsToMany(Product::class);
     }
 
+    protected $fillable = [
+      "name",
+      "description"
+    ];
+
     protected $keyType = 'string';    // supaya Laravel tahu tipe primary key-nya string (UUID)
     public $incrementing = false;     // supaya Laravel gak expect auto increment integer
 

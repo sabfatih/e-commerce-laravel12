@@ -3,7 +3,6 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Review;
 use App\Models\Wishlist;
@@ -28,6 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'username',
         'email',
         'password',
+        'image_url'
     ];
 
     /**
@@ -63,6 +63,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function reviews(){
       return $this->hasMany(Review::class);
+    }
+
+    public function cart(){
+      return $this->hasOne(CartItem::class);
+    }
+
+    public function store(){
+      return $this->hasOne(Store::class);
     }
 
     protected $keyType = 'string';

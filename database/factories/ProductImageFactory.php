@@ -21,7 +21,8 @@ class ProductImageFactory extends Factory
         return [
           'id' => (string) Str::uuid(),
           'product_id' => Product::factory(),
-          'image_url' => fake()->imageUrl(),
+          'image_url' => $image_url = fake()->imageUrl(),
+          'thumb_url' => $image_url,
           'is_primary' => false,
         ];
     }

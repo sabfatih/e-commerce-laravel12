@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Store;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,10 +20,10 @@ class ProductFactory extends Factory
     {
         return [
             'id' => (string) Str::uuid(),
-            'name' => $name = fake()->name(),
-            'slug' => Str::slug($name) . '-' . fake()->unique()->randomNumber(5),
+            'store_id' => Store::factory(),
+            'name' => fake()->word(),
             'description' => fake()->text(),
-            'price' => fake()->randomFloat(2, 0, 1000000),
+            'price' => fake()->randomFloat(2, 0, 1500),
             'stock' => fake()->randomNumber(2, true),
             'weight' => fake()->randomFloat(2, 0, 1000),
         ];
